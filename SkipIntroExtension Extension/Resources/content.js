@@ -1,7 +1,9 @@
-browser.runtime.sendMessage({ greeting: "hello" }).then((response) => {
-    console.log("Received response: ", response);
-});
+setInterval(() => {
+    const buttons = document.getElementsByClassName("watch-video--skip-content-button");
+    if (buttons.length === 0) {
+        return;
+    }
 
-browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log("Received request: ", request);
-});
+    const button = buttons[0];
+    button.click();
+}, 1000)

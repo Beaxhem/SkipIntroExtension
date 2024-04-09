@@ -5,10 +5,13 @@
 //  Created by Illia Senchukov on 28.11.2023.
 //
 
+import AppKit
 import SafariServices
 import os.log
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
+
+    let userDefaults = UserDefaults(suiteName: "group.com.beaxhem.skipIntroExtension")
 
     func beginRequest(with context: NSExtensionContext) {
         let request = context.inputItems.first as? NSExtensionItem
@@ -27,6 +30,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             message = request?.userInfo?["message"]
         }
 
+        
         os_log(.default, "Received message from browser.runtime.sendNativeMessage: %@ (profile: %@)", String(describing: message), profile?.uuidString ?? "none")
 
         let response = NSExtensionItem()
